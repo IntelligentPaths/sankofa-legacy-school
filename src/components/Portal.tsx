@@ -64,13 +64,13 @@ export default function Portal({ onComplete }: Props) {
         });
       })();
 
-      /* ── assembly + pulse (0 → 1600ms) ── */
+      /* ── assembly + pulse + hold (0 → 1800ms) ── */
       const pulse = hexControls.start({
-        scale: [0.85, 1.0, 1.04, 1.0],
-        opacity: [0, 1, 1, 1],
+        scale: [0.85, 1.0, 1.04, 1.0, 1.0],
+        opacity: [0, 1, 1, 1, 1],
         transition: {
-          duration: 1.6,
-          times: [0, 0.375, 0.6875, 1],
+          duration: 1.8,
+          times: [0, 0.333, 0.611, 0.889, 1.0],
           ease: "easeInOut",
         },
       });
@@ -78,36 +78,40 @@ export default function Portal({ onComplete }: Props) {
       await Promise.all([seamFadeIn, pulse]);
       if (cancelled) return;
 
-      /* ── opening phase (1600 → 3200ms): doors swing, seam dissolves, bloom emerges, overlay fades ── */
+      /* ── opening phase (1800 → 4200ms): doors swing heavy, bloom emerges, seam dissolves, overlay fades ── */
       const slide = Promise.all([
         leftControls.start({
           x: "-100vw",
           rotate: -4,
           scale: 1.05,
-          transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] },
+          transition: { duration: 2.4, ease: [0.22, 1, 0.36, 1] },
         }),
         rightControls.start({
           x: "100vw",
           rotate: 4,
           scale: 1.05,
-          transition: { duration: 1.6, ease: [0.22, 1, 0.36, 1] },
+          transition: { duration: 2.4, ease: [0.22, 1, 0.36, 1] },
         }),
       ]);
 
-      const seamDissolve = seamControls.start({
-        opacity: 0,
-        filter: "blur(20px)",
-        transition: { duration: 1.6, ease: "easeOut" },
-      });
+      const seamDissolve = (async () => {
+        await wait(1200); // t=3000
+        if (cancelled) return;
+        await seamControls.start({
+          opacity: 0,
+          filter: "blur(20px)",
+          transition: { duration: 1.2, ease: "easeOut" },
+        });
+      })();
 
       const bloom = (async () => {
-        await wait(300); // t=1900
+        await wait(400); // t=2200
         if (cancelled) return;
         await bloomControls.start({
           scale: [0, 50],
           opacity: [0, 0.85, 0],
           transition: {
-            duration: 1.3,
+            duration: 2.0,
             times: [0, 0.4, 1],
             ease: "easeOut",
           },
@@ -115,7 +119,7 @@ export default function Portal({ onComplete }: Props) {
       })();
 
       const fadeOverlay = (async () => {
-        await wait(1300); // t=2900
+        await wait(2100); // t=3900
         if (cancelled) return;
         await overlayControls.start({
           opacity: 0,

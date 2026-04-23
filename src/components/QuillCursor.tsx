@@ -93,7 +93,7 @@ export default function QuillCursor() {
             ? "drop-shadow(0 0 8px rgba(251, 205, 50, 0.75))"
             : "drop-shadow(0 0 4px rgba(251, 205, 50, 0.45))",
           transition: "filter 0.2s ease",
-        } as React.CSSProperties & Record<string, unknown>
+        } as unknown as React.CSSProperties
       }
     >
       <svg

@@ -154,7 +154,7 @@ export default function HomePage() {
           </FadeIn>
         </section>
         {/* placeholder for sections coming in Prompt 3 */}
-        <section style={{ minHeight: "50vh" }} />
+        <section style={{ minHeight: "150vh" }} />
       </main>
     </div>
   );

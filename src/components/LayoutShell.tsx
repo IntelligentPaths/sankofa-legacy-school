@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import CursorGlow from "./CursorGlow";
+import QuillCursor from "./QuillCursor";
 
 /* ── layout shell ── */
 export default function LayoutShell({ children }: { children: ReactNode }) {
@@ -12,6 +13,7 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
   return (
     <>
       <CursorGlow />
+      <QuillCursor />
       {children}
     </>
   );

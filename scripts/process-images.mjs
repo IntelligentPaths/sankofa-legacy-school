@@ -42,7 +42,7 @@ function buildDuotoneLUT() {
     { at: 0,   r: 0x0A, g: 0x08, b: 0x0C }, // near-pure black, deeper than near-black
     { at: 90,  r: 0x3A, g: 0x26, b: 0x0A }, // warm dark brown shadow
     { at: 180, r: 0xB8, g: 0x75, b: 0x18 }, // rich amber midtone
-    { at: 255, r: 0xF5, g: 0xC0, b: 0x4A }, // muted gold highlight (not pure primary)
+    { at: 255, r: 0xDB, g: 0xA1, b: 0x3C }, // darker richer gold — not neon
   ];
 
   const lut = { r: new Uint8Array(256), g: new Uint8Array(256), b: new Uint8Array(256) };
@@ -89,7 +89,7 @@ async function processImage(src, dst, useDuotone) {
   const { data, info } = await sharp(src)
     .resize({ width: 1920, height: 1920, fit: "inside", withoutEnlargement: true })
     .greyscale()
-    .linear(1.15, -15)
+    .linear(0.85, -10)
     .raw()
     .toBuffer({ resolveWithObject: true });
 

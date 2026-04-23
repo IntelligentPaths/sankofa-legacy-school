@@ -34,6 +34,9 @@ yarn-error.log*
 .env*
 !.env.example
 
+# Raw unprocessed images — only processed versions in public/images/ are committed
+/public/raw/
+
 # vercel
 .vercel
 

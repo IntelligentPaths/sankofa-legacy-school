@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  /* brand colors from Sankofa brand kit */
+  --gold-primary: #FBCD32;
+  --gold-warm: #F5A623;
+  --gold-deep: #E38C07;
+  --rust: #B22714;
+  --brown-dark: #381F00;
+  --near-black: #1C1B20;
+  --cream: #FAF6EE;
+
+  /* semantic tokens */
+  --bg: var(--near-black);
+  --text-primary: var(--cream);
+  --text-secondary: rgba(250, 246, 238, 0.7);
+  --text-muted: rgba(250, 246, 238, 0.5);
+  --accent: var(--gold-primary);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+.font-body { font-family: 'Montserrat', system-ui, sans-serif; }
+
+@keyframes drift-up {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

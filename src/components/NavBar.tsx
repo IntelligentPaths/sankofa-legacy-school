@@ -24,7 +24,6 @@ const NAV_ITEMS = [
 ];
 
 const LOGO_HORIZONTAL = "/logos/sankofa-logo-horizontal.svg";
-const LOGO_MARK = "/logos/sankofa-logo-mark.svg";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -87,7 +86,7 @@ export default function NavBar() {
             margin: "0 auto",
           }}
         >
-          {/* ── brand mark (horizontal lockup desktop, mark only on tight mobile) ── */}
+          {/* ── brand mark — single horizontal lockup, scales naturally on narrow viewports ── */}
           <Link
             href="/"
             aria-label="Sankofa Legacy School — home"
@@ -97,26 +96,17 @@ export default function NavBar() {
               textDecoration: "none",
               color: "inherit",
               lineHeight: 0,
-              height: 56,
+              maxHeight: 56,
             }}
           >
             <img
               src={LOGO_HORIZONTAL}
               alt="Sankofa Legacy School"
-              className="hidden sm:block"
               style={{
-                height: 56,
+                maxWidth: "min(60vw, 320px)",
+                maxHeight: 56,
                 width: "auto",
-                display: "block",
-              }}
-            />
-            <img
-              src={LOGO_MARK}
-              alt="Sankofa Legacy School"
-              className="sm:hidden"
-              style={{
-                height: 40,
-                width: 40,
+                height: "auto",
                 display: "block",
               }}
             />

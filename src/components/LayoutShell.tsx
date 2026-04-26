@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import CursorGlow from "./CursorGlow";
-import GoldCursor from "./GoldCursor";
 import NavBar from "./NavBar";
 
 /* ── layout shell ── */
@@ -20,7 +19,6 @@ export default function LayoutShell({ children }: { children: ReactNode }) {
   return (
     <>
       <CursorGlow />
-      <GoldCursor />
       <NavBar key={pathname /* re-mount per route to refresh data-bg read */} />
       {children}
     </>

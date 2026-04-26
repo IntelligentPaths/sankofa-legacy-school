@@ -36,18 +36,6 @@ html, body {
 .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
 .font-body { font-family: 'Montserrat', system-ui, sans-serif; }
 
-/* ── custom cursor: hide native, QuillCursor takes over ── */
-body { cursor: none; }
-a, button, input, textarea, select, [role="button"] { cursor: none; }
-
-@media (hover: none) {
-  body, a, button, input, textarea, select, [role="button"] { cursor: auto; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body, a, button, input, textarea, select, [role="button"] { cursor: auto; }
-}
-
 @keyframes drift-up {
   0% { transform: translateY(100vh) translateX(0); opacity: 0; }
   10% { opacity: 0.6; }

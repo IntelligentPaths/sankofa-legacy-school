@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import SankofaHexagon from "./SankofaHexagon";
 
 /* ── footer ── */
@@ -13,6 +14,12 @@ const linkStyle: React.CSSProperties = {
   alignItems: "center",
   gap: "0.6rem",
   transition: "color 0.2s",
+};
+
+const sitemapLinkStyle: React.CSSProperties = {
+  ...linkStyle,
+  fontSize: "0.85rem",
+  letterSpacing: "0.08em",
 };
 
 const kickerStyle: React.CSSProperties = {
@@ -52,21 +59,66 @@ function TikTokIcon() {
   );
 }
 
+const SITEMAP = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Approach", href: "/approach" },
+  { label: "Admissions", href: "/admissions" },
+  { label: "Visit", href: "/visit" },
+  { label: "Ecosystem", href: "/ecosystem" },
+];
+
+/* ── checkerboard hairline (gold/amber/black brand kit edge motif) ── */
+function CheckerHairline() {
+  return (
+    <svg
+      width="100%"
+      height={6}
+      viewBox="0 0 200 6"
+      preserveAspectRatio="none"
+      style={{ display: "block" }}
+      aria-hidden
+    >
+      <defs>
+        <pattern id="footer-checker" x="0" y="0" width="12" height="6" patternUnits="userSpaceOnUse">
+          <rect width="6" height="6" fill="#FBCD32" />
+          <rect x="6" width="6" height="6" fill="#1C1B20" />
+        </pattern>
+        <pattern id="footer-checker-alt" x="0" y="0" width="12" height="6" patternUnits="userSpaceOnUse">
+          <rect width="6" height="6" fill="#E38C07" />
+          <rect x="6" width="6" height="6" fill="#B22714" />
+        </pattern>
+      </defs>
+      <rect width="200" height="3" fill="url(#footer-checker)" />
+      <rect y="3" width="200" height="3" fill="url(#footer-checker-alt)" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   return (
     <footer
       style={{
         background: "var(--near-black)",
-        padding: "4rem 2rem 2rem",
-        borderTop: "1px solid rgba(251, 205, 50, 0.15)",
+        color: "var(--text-primary)",
+        padding: "0",
         position: "relative",
         zIndex: 20,
       }}
     >
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        {/* ── three-column grid ── */}
+      {/* ── brand-pattern hairline at top ── */}
+      <CheckerHairline />
+
+      <div
+        style={{
+          padding: "4rem 2rem 2rem",
+          maxWidth: 1200,
+          margin: "0 auto",
+        }}
+      >
+        {/* ── 4-column footer grid: brand | sitemap | connect | ecosystem ── */}
         <div
-          className="grid grid-cols-1 md:grid-cols-3"
+          className="grid grid-cols-1 md:grid-cols-4"
           style={{ gap: "3rem" }}
         >
           {/* ── col 1: brand ── */}
@@ -95,7 +147,35 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* ── col 2: connect ── */}
+          {/* ── col 2: sitemap ── */}
+          <div>
+            <p style={kickerStyle}>Site</p>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.5rem",
+              }}
+            >
+              {SITEMAP.map((s) => (
+                <li key={s.href}>
+                  <Link
+                    href={s.href}
+                    style={sitemapLinkStyle}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold-primary)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+                  >
+                    {s.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ── col 3: connect ── */}
           <div>
             <p style={kickerStyle}>Connect</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -126,10 +206,18 @@ export default function Footer() {
                 <TikTokIcon />
                 TikTok
               </a>
+              <a
+                href="mailto:contact@sankofalegacyschool.org"
+                style={linkStyle}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold-primary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+              >
+                contact@sankofalegacyschool.org
+              </a>
             </div>
           </div>
 
-          {/* ── col 3: ecosystem ── */}
+          {/* ── col 4: ecosystem ── */}
           <div>
             <p style={kickerStyle}>Ecosystem</p>
             <p
@@ -137,11 +225,22 @@ export default function Footer() {
               style={{
                 fontSize: "0.9rem",
                 color: "var(--text-muted)",
-                margin: 0,
+                margin: "0 0 0.75rem",
                 lineHeight: 1.6,
               }}
             >
-              Part of the Pura Vida Legacy Ecosystem.
+              Part of the{" "}
+              <Link
+                href="/ecosystem"
+                style={{
+                  color: "var(--gold-primary)",
+                  textDecoration: "none",
+                  borderBottom: "1px dotted rgba(251,205,50,0.5)",
+                }}
+              >
+                Pura Vida Legacy Ecosystem
+              </Link>
+              .
             </p>
           </div>
         </div>
@@ -176,14 +275,16 @@ export default function Footer() {
             © 2026 Sankofa Legacy School. All rights reserved.
           </p>
           <p
-            className="font-display italic"
+            className="font-body"
             style={{
-              fontSize: "0.7rem",
-              color: "var(--gold-primary)",
+              fontSize: "0.65rem",
+              color: "var(--text-muted)",
               margin: 0,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
             }}
           >
-            &ldquo;Se wo were fi na wosankofa a yenkyi.&rdquo;
+            South Fort Worth, Texas
           </p>
         </div>
       </div>

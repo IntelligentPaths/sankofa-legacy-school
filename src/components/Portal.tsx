@@ -5,11 +5,12 @@ import { motion, useAnimationControls } from "framer-motion";
 import SankofaHexagon from "./SankofaHexagon";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
-/* ── portal: cinematic intro — doors opening ── */
+/* ── portal: cinematic intro — doors opening, full logo emerges from bloom ── */
 
 type Props = { onComplete: () => void };
 
 const HEX_SIZE = 280;
+const LOGO_REVEAL_WIDTH = 600;
 
 const PANEL_IMAGE =
   "linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4))," +
@@ -25,6 +26,7 @@ export default function Portal({ onComplete }: Props) {
   const hexControls = useAnimationControls();
   const bloomControls = useAnimationControls();
   const seamControls = useAnimationControls();
+  const logoControls = useAnimationControls();
 
   const fireComplete = () => {
     if (completedRef.current) return;
@@ -39,12 +41,14 @@ export default function Portal({ onComplete }: Props) {
 
     async function run() {
       if (reducedMotion) {
-        await hexControls.start({
+        // Reduced motion: just fade the full logo in, hold, fade out.
+        await logoControls.start({
           opacity: 1,
+          scale: 1,
           transition: { duration: 0.5 },
         });
         if (cancelled) return;
-        await wait(400);
+        await wait(700);
         if (cancelled) return;
         await overlayControls.start({
           opacity: 0,
@@ -54,7 +58,7 @@ export default function Portal({ onComplete }: Props) {
         return;
       }
 
-      /* ── seam glow appears during assembly ── */
+      /* ── seam glow appears during assembly (t=300 → t=700) ── */
       const seamFadeIn = (async () => {
         await wait(300);
         if (cancelled) return;
@@ -78,7 +82,7 @@ export default function Portal({ onComplete }: Props) {
       await Promise.all([seamFadeIn, pulse]);
       if (cancelled) return;
 
-      /* ── opening phase (1800 → 4200ms): doors swing heavy, bloom emerges, seam dissolves, overlay fades ── */
+      /* ── opening phase (1800 → 4200ms) ── */
       const slide = Promise.all([
         leftControls.start({
           x: "-100vw",
@@ -118,16 +122,37 @@ export default function Portal({ onComplete }: Props) {
         });
       })();
 
-      const fadeOverlay = (async () => {
-        await wait(2100); // t=3900
+      /* ── logo reveal: emerges from bloom at t=3800, holds, fades with overlay ── */
+      const logoReveal = (async () => {
+        await wait(2000); // t=3800 — overlaps with last 400ms of bloom so logo grows from the gold light
         if (cancelled) return;
-        await overlayControls.start({
-          opacity: 0,
-          transition: { duration: 0.6, ease: "easeOut" },
+        await logoControls.start({
+          opacity: 1,
+          scale: 1,
+          transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
         });
+        if (cancelled) return;
+        // hold visible for ~600ms (t=4200 → t=4800)
+        await wait(600);
       })();
 
-      await Promise.all([slide, seamDissolve, bloom, fadeOverlay]);
+      /* ── final fade: logo + overlay together (t=4800 → t=5200) ── */
+      const finalFade = (async () => {
+        await wait(3000); // t=4800
+        if (cancelled) return;
+        await Promise.all([
+          logoControls.start({
+            opacity: 0,
+            transition: { duration: 0.4, ease: "easeOut" },
+          }),
+          overlayControls.start({
+            opacity: 0,
+            transition: { duration: 0.4, ease: "easeOut" },
+          }),
+        ]);
+      })();
+
+      await Promise.all([slide, seamDissolve, bloom, logoReveal, finalFade]);
       if (!cancelled) fireComplete();
     }
 
@@ -152,11 +177,7 @@ export default function Portal({ onComplete }: Props) {
         justifyContent: "center",
       }}
     >
-      {reducedMotion ? (
-        <motion.div initial={{ opacity: 0 }} animate={hexControls}>
-          <SankofaHexagon size={HEX_SIZE} uniqueId="portal-rm" />
-        </motion.div>
-      ) : (
+      {reducedMotion ? null : (
         <>
           {/* ── left door panel ── */}
           <motion.div
@@ -263,6 +284,21 @@ export default function Portal({ onComplete }: Props) {
           />
         </>
       )}
+
+      {/* ── full logo reveal — sits above bloom, scales in from center ── */}
+      <motion.img
+        src="/logos/sankofa-full-logo.svg"
+        alt="Sankofa Legacy School"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={logoControls}
+        style={{
+          position: "relative",
+          width: "min(80vw, " + LOGO_REVEAL_WIDTH + "px)",
+          height: "auto",
+          zIndex: 1,
+          filter: "drop-shadow(0 8px 32px rgba(251,205,50,0.35))",
+        }}
+      />
 
       {/* ── skip button ── */}
       <button

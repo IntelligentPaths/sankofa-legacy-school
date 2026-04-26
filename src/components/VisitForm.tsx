@@ -3,33 +3,20 @@
 import { useState, useMemo } from "react";
 import type { FormEvent } from "react";
 
-/* ── Interest form — six required fields ──
+/* ── VisitForm — light 3-field variant for the /visit page.
  *
- * parentName, childName, email, phone, childGrade, howHeard
- * Lenient phone validation — accepts US-style with +/(/-/space variants.
- * Submit disabled while any required field is empty.
+ * Posts to /api/interest with synthetic placeholder values for the
+ * required fields the route still expects (childName, phone, childGrade).
+ * The route stays the strict source of truth for enrollment intake on
+ * /admissions; this is only a low-friction "I'd like to visit" inquiry.
+ *
+ * Note: the form labels the visitor's optional message rather than
+ * forcing them through a 6-field form just to ask "can I come visit."
  * ──────────────────────────────────────────────────────────────── */
 
 type SubmitState = "idle" | "success" | "error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// Accepts 5551234567, 555-123-4567, (555) 123-4567, +1 555 123 4567 etc.
-const PHONE_RE = /^\+?\d[\d\s().\-]{8,17}\d$/;
-
-const GRADES = [
-  "Pre-K",
-  "K",
-  "1st",
-  "2nd",
-  "3rd",
-  "4th",
-  "5th",
-  "Not Sure Yet",
-];
-
-/* Inherit color (var(--text-primary) on dark bg, var(--near-black) on cream)
- * from the surface PageShell sets via .data-bg. The form doesn't hardcode a
- * background color the way it used to — it's transparent and reads context. */
 
 const labelStyle: React.CSSProperties = {
   display: "block",
@@ -61,57 +48,40 @@ const inputBaseStyle: React.CSSProperties = {
   transition: "border-color 0.2s, background 0.2s, box-shadow 0.2s",
 };
 
-function onFocus(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
+function onFocus(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
   e.currentTarget.style.borderColor = "var(--gold-deep)";
   e.currentTarget.style.background = "rgba(255,255,255,0.85)";
   e.currentTarget.style.boxShadow = "0 0 0 3px rgba(251,205,50,0.18)";
 }
-function onBlur(e: React.FocusEvent<HTMLInputElement | HTMLSelectElement>) {
+function onBlur(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
   e.currentTarget.style.borderColor = "rgba(56,31,0,0.2)";
   e.currentTarget.style.background = "rgba(255,255,255,0.55)";
   e.currentTarget.style.boxShadow = "none";
 }
 
-export default function InterestForm() {
-  const [parentName, setParentName] = useState("");
-  const [childName, setChildName] = useState("");
+export default function VisitForm() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [childGrade, setChildGrade] = useState("");
-  const [howHeard, setHowHeard] = useState("");
-
+  const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  // disable submit until every required field is filled
   const allFilled = useMemo(
-    () =>
-      parentName.trim() !== "" &&
-      childName.trim() !== "" &&
-      email.trim() !== "" &&
-      phone.trim() !== "" &&
-      childGrade.trim() !== "" &&
-      howHeard.trim() !== "",
-    [parentName, childName, email, phone, childGrade, howHeard]
+    () => name.trim() !== "" && email.trim() !== "" && message.trim() !== "",
+    [name, email, message]
   );
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     if (!allFilled) {
       setSubmitState("error");
-      setErrorMessage("Please fill out every field before submitting.");
+      setErrorMessage("Please fill out every field.");
       return;
     }
     if (!EMAIL_RE.test(email.trim())) {
       setSubmitState("error");
-      setErrorMessage("That email doesn't look right — please double-check it.");
-      return;
-    }
-    if (!PHONE_RE.test(phone.trim())) {
-      setSubmitState("error");
-      setErrorMessage("Please enter a valid phone number.");
+      setErrorMessage("That email doesn't look right — please check it.");
       return;
     }
 
@@ -120,28 +90,26 @@ export default function InterestForm() {
     setErrorMessage("");
 
     try {
+      // Compose payload matching /api/interest's required shape;
+      // visit-specific fields ride along in `howHeard`.
       const res = await fetch("/api/interest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          parentName: parentName.trim(),
-          childName: childName.trim(),
+          parentName: name.trim(),
+          childName: "(visit inquiry)",
           email: email.trim(),
-          phone: phone.trim(),
-          childGrade,
-          howHeard: howHeard.trim(),
+          phone: "(visit inquiry)",
+          childGrade: "(visit inquiry)",
+          howHeard: `[VISIT INQUIRY] ${message.trim()}`,
         }),
       });
       const data = await res.json().catch(() => ({}));
-
       if (res.ok && data.success) {
         setSubmitState("success");
-        setParentName("");
-        setChildName("");
+        setName("");
         setEmail("");
-        setPhone("");
-        setChildGrade("");
-        setHowHeard("");
+        setMessage("");
       } else {
         setSubmitState("error");
         setErrorMessage(
@@ -161,126 +129,55 @@ export default function InterestForm() {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div style={{ display: "grid", gap: "1.25rem" }}>
-        {/* ── parent name ── */}
         <div>
-          <label htmlFor="parentName" style={labelStyle}>
-            Parent Name<span style={requiredStarStyle} aria-hidden>*</span>
+          <label htmlFor="visit-name" style={labelStyle}>
+            Your Name<span style={requiredStarStyle} aria-hidden>*</span>
           </label>
           <input
-            id="parentName"
+            id="visit-name"
             type="text"
-            value={parentName}
-            onChange={(e) => setParentName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             onFocus={onFocus}
             onBlur={onBlur}
-            required
             style={inputBaseStyle}
             autoComplete="name"
-          />
-        </div>
-
-        {/* ── child name ── */}
-        <div>
-          <label htmlFor="childName" style={labelStyle}>
-            Child&rsquo;s Name<span style={requiredStarStyle} aria-hidden>*</span>
-          </label>
-          <input
-            id="childName"
-            type="text"
-            value={childName}
-            onChange={(e) => setChildName(e.target.value)}
-            onFocus={onFocus}
-            onBlur={onBlur}
             required
-            style={inputBaseStyle}
-            autoComplete="off"
           />
         </div>
-
-        {/* ── email ── */}
         <div>
-          <label htmlFor="email" style={labelStyle}>
+          <label htmlFor="visit-email" style={labelStyle}>
             Email<span style={requiredStarStyle} aria-hidden>*</span>
           </label>
           <input
-            id="email"
+            id="visit-email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onFocus={onFocus}
             onBlur={onBlur}
-            required
             style={inputBaseStyle}
             autoComplete="email"
-            inputMode="email"
+            required
           />
         </div>
-
-        {/* ── phone ── */}
         <div>
-          <label htmlFor="phone" style={labelStyle}>
-            Phone<span style={requiredStarStyle} aria-hidden>*</span>
-          </label>
-          <input
-            id="phone"
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            required
-            style={inputBaseStyle}
-            autoComplete="tel"
-            inputMode="tel"
-            placeholder="(555) 123-4567"
-          />
-        </div>
-
-        {/* ── child grade ── */}
-        <div>
-          <label htmlFor="childGrade" style={labelStyle}>
-            Child&rsquo;s Grade<span style={requiredStarStyle} aria-hidden>*</span>
-          </label>
-          <select
-            id="childGrade"
-            value={childGrade}
-            onChange={(e) => setChildGrade(e.target.value)}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            required
-            style={inputBaseStyle}
-          >
-            <option value="" disabled>
-              Select a grade
-            </option>
-            {GRADES.map((g) => (
-              <option key={g} value={g}>
-                {g}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* ── how heard (now required) ── */}
-        <div>
-          <label htmlFor="howHeard" style={labelStyle}>
-            How did you hear about us?
+          <label htmlFor="visit-message" style={labelStyle}>
+            What would you like to know?
             <span style={requiredStarStyle} aria-hidden>*</span>
           </label>
-          <input
-            id="howHeard"
-            type="text"
-            value={howHeard}
-            onChange={(e) => setHowHeard(e.target.value)}
+          <textarea
+            id="visit-message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             onFocus={onFocus}
             onBlur={onBlur}
+            rows={4}
+            style={{ ...inputBaseStyle, resize: "vertical", minHeight: 110 }}
             required
-            style={inputBaseStyle}
-            placeholder="A friend, social media, a community event…"
           />
         </div>
 
-        {/* ── submit ── */}
         <button
           type="submit"
           disabled={submitDisabled}
@@ -307,10 +204,9 @@ export default function InterestForm() {
             marginTop: "0.5rem",
           }}
         >
-          {isSubmitting ? "Submitting..." : "Join the Founding Cohort"}
+          {isSubmitting ? "Sending..." : "Send"}
         </button>
 
-        {/* ── status ── */}
         {submitState === "success" && (
           <p
             className="font-body"
@@ -323,7 +219,7 @@ export default function InterestForm() {
               fontWeight: 600,
             }}
           >
-            Thank you! We&rsquo;ll be in touch about the founding cohort.
+            Thank you! We&rsquo;ll respond within a few days.
           </p>
         )}
         {submitState === "error" && (

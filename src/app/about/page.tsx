@@ -51,7 +51,7 @@ function PatternDivider() {
 export default function AboutPage() {
   return (
     <PageShell bg="cream" atmosphere={false}>
-      <main style={{ paddingTop: 64 }}>
+      <main>
         {/* ══ HERO BAND ══ */}
         <section
           style={{
@@ -62,6 +62,19 @@ export default function AboutPage() {
           }}
         >
           <FadeIn>
+            <img
+              src="/logos/sankofa-logo-mark.svg"
+              alt=""
+              aria-hidden
+              width={88}
+              height={88}
+              style={{
+                width: 88,
+                height: 88,
+                display: "block",
+                margin: "0 auto 1.5rem",
+              }}
+            />
             <p style={kicker}>Our Story</p>
           </FadeIn>
           <FadeIn delay={0.1}>

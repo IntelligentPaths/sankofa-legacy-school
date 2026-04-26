@@ -23,9 +23,10 @@ export default function GoldCursor() {
   const mouseY = useMotionValue(-100);
   const scaleRaw = useMotionValue(1);
 
-  const x = useSpring(mouseX, { damping: 30, stiffness: 260, mass: 0.4 });
-  const y = useSpring(mouseY, { damping: 30, stiffness: 260, mass: 0.4 });
-  const scale = useSpring(scaleRaw, { damping: 24, stiffness: 240, mass: 0.3 });
+  // Round 2: snappier — track 1:1 with the pointer instead of trailing.
+  const x = useSpring(mouseX, { damping: 50, stiffness: 800, mass: 0.3 });
+  const y = useSpring(mouseY, { damping: 50, stiffness: 800, mass: 0.3 });
+  const scale = useSpring(scaleRaw, { damping: 20, stiffness: 400 });
 
   useEffect(() => {
     if (typeof window === "undefined") return;

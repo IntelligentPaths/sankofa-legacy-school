@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import SankofaHexagon from "./SankofaHexagon";
 
 /* ── footer ── */
 
@@ -123,7 +122,13 @@ export default function Footer() {
         >
           {/* ── col 1: brand ── */}
           <div>
-            <SankofaHexagon size={48} uniqueId="footer" />
+            <img
+              src="/logos/sankofa-logo-mark.svg"
+              alt="Sankofa Legacy School"
+              width={64}
+              height={64}
+              style={{ display: "block", width: 64, height: 64 }}
+            />
             <p
               className="font-display"
               style={{

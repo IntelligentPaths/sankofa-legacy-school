@@ -122,13 +122,11 @@ export default function HomePage() {
         {/* ══ HERO ══ */}
         <section
           style={{
-            minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
             gap: "2rem",
-            padding: "6rem 1.5rem 5rem",
+            padding: "3rem 1.5rem 5rem",
             textAlign: "center",
             position: "relative",
           }}
@@ -144,12 +142,13 @@ export default function HomePage() {
 
           <FadeIn delay={0.25}>
             <img
-              src="/logos/sankofa-full-logo.svg"
+              src="/logos/sankofa-logo-full.svg"
               alt="Sankofa Legacy School"
               style={{
-                width: "min(92vw, 700px)",
+                width: "min(80vw, 480px)",
                 height: "auto",
                 display: "block",
+                background: "transparent",
                 filter: "drop-shadow(0 8px 32px rgba(0,0,0,0.45))",
               }}
             />

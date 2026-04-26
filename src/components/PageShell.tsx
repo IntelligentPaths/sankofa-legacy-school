@@ -36,7 +36,7 @@ const BG_STYLES: Record<Bg, React.CSSProperties> = {
 export default function PageShell({
   children,
   bg = "cream",
-  corner = true,
+  corner = false,
   atmosphere,
 }: Props) {
   const showAtmosphere = atmosphere ?? bg === "dark";
@@ -68,7 +68,10 @@ export default function PageShell({
 
       {corner && <CornerHex />}
 
-      <div className="relative z-20">{children}</div>
+      {/* paddingTop reserves space for the fixed 64px NavBar +16px breathing room */}
+      <div className="relative z-20" style={{ paddingTop: 80 }}>
+        {children}
+      </div>
     </div>
   );
 }

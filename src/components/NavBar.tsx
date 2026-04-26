@@ -3,14 +3,16 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import SankofaHexagon from "./SankofaHexagon";
 
 /* ── NavBar
  *
  * Persistent top nav. Reads pathname for active highlight. Adapts to the
- * surface beneath: dark page → translucent dark with cream text, cream
- * page → translucent cream with dark text. The portal on `/` renders at
- * z-100 and fully covers nav until it fades — no extra gating needed.
+ * surface beneath via the [data-bg] attribute set by PageShell.
+ *
+ * Bleed fix (Round 2): hard hairline border, no box-shadow. Backdrop blur
+ * stays at a softer 10px so the gold/amber of any logo behind doesn't
+ * smear visibly through translucent surface — combined with the 80px
+ * top padding PageShell now reserves, content never sits under the nav.
  * ──────────────────────────────────────────────────────────────── */
 
 const NAV_ITEMS = [
@@ -20,6 +22,9 @@ const NAV_ITEMS = [
   { label: "Admissions", href: "/admissions" },
   { label: "Visit", href: "/visit" },
 ];
+
+const LOGO_HORIZONTAL = "/logos/sankofa-logo-horizontal.svg";
+const LOGO_MARK = "/logos/sankofa-logo-mark.svg";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -31,8 +36,6 @@ export default function NavBar() {
   const [open, setOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
 
-  // Read the data-bg attribute set by PageShell to pick the surface theme.
-  // Falls back to dark when no shell is mounted (covers transient states).
   useEffect(() => {
     if (typeof document === "undefined") return;
     const root = document.querySelector<HTMLElement>("[data-bg]");
@@ -40,21 +43,17 @@ export default function NavBar() {
     setIsDark(bg === "dark");
   }, [pathname]);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
   const surfaceBg = isDark
-    ? "rgba(28, 27, 32, 0.72)"
-    : "rgba(250, 246, 238, 0.78)";
-  const surfaceBorder = isDark
-    ? "rgba(251, 205, 50, 0.18)"
-    : "rgba(56, 31, 0, 0.12)";
+    ? "rgba(28, 27, 32, 0.78)"
+    : "rgba(250, 246, 238, 0.82)";
   const linkColor = isDark
     ? "rgba(250, 246, 238, 0.78)"
     : "rgba(28, 27, 32, 0.78)";
-  const linkActive = "var(--gold-primary)";
+  const linkActive = isDark ? "var(--gold-primary)" : "var(--rust)";
 
   return (
     <>
@@ -68,9 +67,11 @@ export default function NavBar() {
           height: 64,
           zIndex: 40, // below Portal (100), above content
           background: surfaceBg,
-          borderBottom: `1px solid ${surfaceBorder}`,
-          backdropFilter: "blur(14px)",
-          WebkitBackdropFilter: "blur(14px)",
+          // hard 0.5px hairline — Round 2 bleed fix
+          borderBottom: "0.5px solid rgba(245, 166, 35, 0.15)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          boxShadow: "none",
           display: "flex",
           alignItems: "center",
           padding: "0 1.5rem",
@@ -86,20 +87,39 @@ export default function NavBar() {
             margin: "0 auto",
           }}
         >
-          {/* ── brand mark ── */}
+          {/* ── brand mark (horizontal lockup desktop, mark only on tight mobile) ── */}
           <Link
             href="/"
             aria-label="Sankofa Legacy School — home"
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: "0.6rem",
               textDecoration: "none",
               color: "inherit",
               lineHeight: 0,
+              height: 56,
             }}
           >
-            <SankofaHexagon size={32} uniqueId="nav" />
+            <img
+              src={LOGO_HORIZONTAL}
+              alt="Sankofa Legacy School"
+              className="hidden sm:block"
+              style={{
+                height: 56,
+                width: "auto",
+                display: "block",
+              }}
+            />
+            <img
+              src={LOGO_MARK}
+              alt="Sankofa Legacy School"
+              className="sm:hidden"
+              style={{
+                height: 40,
+                width: 40,
+                display: "block",
+              }}
+            />
           </Link>
 
           {/* ── desktop links ── */}
@@ -130,7 +150,7 @@ export default function NavBar() {
                       transition: "color 0.2s",
                       paddingBottom: 4,
                       borderBottom: active
-                        ? `1px solid var(--gold-primary)`
+                        ? `1px solid ${linkActive}`
                         : "1px solid transparent",
                     }}
                   >
@@ -231,7 +251,7 @@ export default function NavBar() {
                       fontWeight: 600,
                       display: "block",
                       paddingBottom: "0.5rem",
-                      borderBottom: `1px solid ${surfaceBorder}`,
+                      borderBottom: "1px solid rgba(245,166,35,0.15)",
                     }}
                   >
                     {item.label}

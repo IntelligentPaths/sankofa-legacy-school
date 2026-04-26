@@ -119,7 +119,7 @@ const kicker: React.CSSProperties = {
 export default function ApproachPage() {
   return (
     <PageShell bg="cream" atmosphere={false}>
-      <main style={{ paddingTop: 64 /* nav bar */ }}>
+      <main>
         {/* ══ HERO BAND ══ */}
         <section
           style={{
@@ -130,6 +130,19 @@ export default function ApproachPage() {
           }}
         >
           <FadeIn>
+            <img
+              src="/logos/sankofa-logo-mark.svg"
+              alt=""
+              aria-hidden
+              width={88}
+              height={88}
+              style={{
+                width: 88,
+                height: 88,
+                display: "block",
+                margin: "0 auto 1.5rem",
+              }}
+            />
             <p style={kicker}>Our Approach</p>
           </FadeIn>
           <FadeIn delay={0.1}>

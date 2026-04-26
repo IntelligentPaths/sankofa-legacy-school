@@ -287,7 +287,7 @@ export default function Portal({ onComplete }: Props) {
 
       {/* ── full logo reveal — sits above bloom, scales in from center ── */}
       <motion.img
-        src="/logos/sankofa-full-logo.svg"
+        src="/logos/sankofa-logo-full.svg"
         alt="Sankofa Legacy School"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={logoControls}

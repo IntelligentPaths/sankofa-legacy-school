@@ -31,7 +31,7 @@ const PILLARS_TEASER: Pillar[] = [
     number: "01",
     name: "Mastery",
     summary:
-      "Deep competence in core academic domains — reasoning, not memorization.",
+      "Deep competence in core academic domains — reasoning, not memorization. Students don’t just learn — they understand and can explain their thinking.",
     anchor: "/approach#mastery",
     variant: 1,
     accent: "var(--gold-primary)",
@@ -40,7 +40,7 @@ const PILLARS_TEASER: Pillar[] = [
     number: "02",
     name: "Identity",
     summary:
-      "A strong sense of self grounded in cultural literacy and historical awareness.",
+      "A strong sense of self grounded in cultural literacy and historical awareness. Students learn who they are, where they come from, and how they move in the world.",
     anchor: "/approach#identity",
     variant: 2,
     accent: "var(--rust)",
@@ -49,7 +49,7 @@ const PILLARS_TEASER: Pillar[] = [
     number: "03",
     name: "Creation",
     summary:
-      "Knowledge applied — building, designing, and producing meaningful work.",
+      "Knowledge applied — building, designing, and producing meaningful work. Students create real projects — not just complete assignments.",
     anchor: "/approach#creation",
     variant: 3,
     accent: "var(--gold-warm)",
@@ -58,20 +58,45 @@ const PILLARS_TEASER: Pillar[] = [
     number: "04",
     name: "Community",
     summary:
-      "Responsibility toward others — leading, collaborating, contributing.",
+      "Responsibility toward others — leading, collaborating, contributing. Students lead, work together, and give back every day.",
     anchor: "/approach#community",
     variant: 4,
     accent: "var(--gold-deep)",
   },
 ];
 
-const DIFFERENTIATORS = [
-  "Small learning environment — your child is known by name",
-  "Personalized academic progress — no one left behind, no one held back",
-  "Hands-on learning experiences across every subject",
-  "Mentorship and leadership development from day one",
-  "Cultural and global learning woven through every pillar",
-  "Real-world skill building that translates beyond the classroom",
+/* ── Why Sankofa: three categories with two supporting points each ── */
+type WhyGroup = {
+  category: string;
+  points: string[];
+  accent: string;
+};
+
+const WHY_GROUPS: WhyGroup[] = [
+  {
+    category: "Learning & Progress",
+    accent: "var(--gold-primary)",
+    points: [
+      "Small by design — your child is known, seen, and supported every day.",
+      "Personalized progress — your child moves forward when they’re ready, not when the class moves on.",
+    ],
+  },
+  {
+    category: "Experience & Application",
+    accent: "var(--gold-warm)",
+    points: [
+      "Hands-on learning across every subject — thinking, building, and solving instead of worksheets.",
+      "Real-world skills that stick — communication, problem-solving, and independence for life.",
+    ],
+  },
+  {
+    category: "Identity & Leadership",
+    accent: "var(--rust)",
+    points: [
+      "Leadership from day one — students don’t wait their turn to lead.",
+      "Culture and global perspective built into daily learning — not added on.",
+    ],
+  },
 ];
 
 const visuallyHidden: React.CSSProperties = {
@@ -167,8 +192,7 @@ export default function HomePage() {
                 fontWeight: 500,
               }}
             >
-              Building scholars, leaders, and legacy-makers — the next
-              generation, rooted.
+              Building scholars, leaders, and legacy-makers.
             </p>
           </FadeIn>
 
@@ -183,7 +207,7 @@ export default function HomePage() {
                 margin: 0,
               }}
             >
-              A small, intentional K–5 microschool in South Fort Worth —
+              A small, intentional K–5 microschool in South Fort Worth offering
               rigorous academics, cultural grounding, and project-based learning.
             </p>
           </FadeIn>
@@ -263,8 +287,8 @@ export default function HomePage() {
                     margin: 0,
                   }}
                 >
-                  Where your child is known, challenged, and prepared —
-                  academically, culturally, and personally.
+                  Where your child is known, challenged, and prepared — for
+                  school, for life, and for who they are becoming.
                 </p>
               </div>
             </div>
@@ -419,7 +443,7 @@ export default function HomePage() {
                   e.currentTarget.style.color = "var(--gold-primary)";
                 }}
               >
-                Explore our approach →
+                See how Sankofa actually works →
               </Link>
             </div>
           </FadeIn>
@@ -450,9 +474,9 @@ export default function HomePage() {
             >
               <em style={{ color: "var(--gold-primary)" }}>Sankofa</em> is an
               Adinkra concept from the Akan people of Ghana — meaning{" "}
-              <em>&ldquo;go back and fetch it.&rdquo;</em> The bird flies
-              forward while looking backward, reclaiming the wisdom of the
-              past to build what comes next.
+              <em>&lsquo;go back and fetch it.&rsquo;</em> The bird moves
+              forward while looking back, using the wisdom of the past to
+              build what comes next.
             </p>
           </FadeIn>
           <FadeIn delay={0.3}>
@@ -475,16 +499,16 @@ export default function HomePage() {
           </FadeIn>
         </section>
 
-        {/* ══ DIFFERENTIATORS ══ */}
+        {/* ══ WHY SANKOFA — three categories with two supporting points each ══ */}
         <section
           style={{
             padding: "5rem 1.5rem",
-            maxWidth: 1000,
+            maxWidth: 1100,
             margin: "0 auto",
           }}
         >
           <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+            <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
               <p style={kicker}>Why Sankofa</p>
               <h2
                 className="font-display"
@@ -504,45 +528,55 @@ export default function HomePage() {
               style={{
                 display: "grid",
                 gridTemplateColumns:
-                  "repeat(auto-fit, minmax(280px, 1fr))",
-                gap: "1.25rem",
+                  "repeat(auto-fit, minmax(300px, 1fr))",
+                gap: "2.5rem",
               }}
             >
-              {DIFFERENTIATORS.map((d, i) => (
+              {WHY_GROUPS.map((group) => (
                 <div
-                  key={i}
+                  key={group.category}
                   style={{
-                    display: "flex",
-                    gap: "1rem",
-                    alignItems: "flex-start",
-                    padding: "1.25rem",
-                    background: "rgba(251,205,50,0.03)",
-                    border: "1px solid rgba(251,205,50,0.12)",
-                    borderRadius: 4,
+                    paddingLeft: "1.25rem",
+                    borderLeft: `2px solid ${group.accent}`,
                   }}
                 >
-                  <div
+                  <h3
+                    className="font-display"
                     style={{
-                      flexShrink: 0,
-                      width: 8,
-                      height: 8,
-                      marginTop: 8,
-                      borderRadius: "50%",
-                      background:
-                        "linear-gradient(135deg, var(--gold-primary), var(--gold-warm))",
-                    }}
-                  />
-                  <p
-                    className="font-body"
-                    style={{
-                      color: "var(--text-secondary)",
-                      margin: 0,
-                      lineHeight: 1.55,
-                      fontSize: "0.95rem",
+                      fontSize: "clamp(1.25rem, 2.4vw, 1.6rem)",
+                      color: group.accent,
+                      margin: "0 0 1.25rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.01em",
                     }}
                   >
-                    {d}
-                  </p>
+                    {group.category}
+                  </h3>
+                  <ul
+                    style={{
+                      listStyle: "none",
+                      margin: 0,
+                      padding: 0,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "1rem",
+                    }}
+                  >
+                    {group.points.map((point, i) => (
+                      <li
+                        key={i}
+                        className="font-body"
+                        style={{
+                          color: "var(--text-secondary)",
+                          fontSize: "0.95rem",
+                          lineHeight: 1.6,
+                          margin: 0,
+                        }}
+                      >
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
@@ -583,8 +617,8 @@ export default function HomePage() {
                   margin: "0 auto",
                 }}
               >
-                Enrollment is intentionally limited. Tell us about your
-                family and we&rsquo;ll reach out with next steps.
+                Enrollment is limited by design. We&rsquo;re building a
+                small, intentional community of families for our first year.
               </p>
             </div>
           </FadeIn>
@@ -601,6 +635,20 @@ export default function HomePage() {
             >
               <InterestForm />
             </div>
+          </FadeIn>
+          <FadeIn delay={0.3}>
+            <p
+              className="font-body"
+              style={{
+                color: "var(--text-muted)",
+                fontSize: "0.85rem",
+                textAlign: "center",
+                margin: "1.5rem 0 0",
+                lineHeight: 1.55,
+              }}
+            >
+              We&rsquo;ll follow up within 24–48 hours with next steps.
+            </p>
           </FadeIn>
         </section>
       </main>

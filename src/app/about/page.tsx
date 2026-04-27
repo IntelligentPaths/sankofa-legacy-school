@@ -321,8 +321,8 @@ export default function AboutPage() {
               </h2>
               <p style={bodyText}>
                 Sankofa Legacy School sits within a broader network of
-                organizations — Pura Vida Youth, UYN Learning Systems, Live
-                Pura Vida, Roots Rediscovered — each rooted in legacy,
+                organizations — Pura Vida Youth, Ubuntu Y Nosotros Learning
+                Systems, Roots Rediscovered — each rooted in legacy,
                 learning, and community uplift. The school is the
                 educational anchor of that ecosystem: where children are
                 shaped, families are connected, and the work continues.

@@ -63,7 +63,6 @@ const SITEMAP = [
   { label: "About", href: "/about" },
   { label: "Approach", href: "/approach" },
   { label: "Admissions", href: "/admissions" },
-  { label: "Visit", href: "/visit" },
   { label: "Ecosystem", href: "/ecosystem" },
 ];
 
@@ -184,6 +183,25 @@ export default function Footer() {
           <div>
             <p style={kickerStyle}>Connect</p>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <p
+                className="font-body"
+                style={{
+                  fontSize: "0.85rem",
+                  color: "var(--text-muted)",
+                  margin: "0 0 0.25rem",
+                  lineHeight: 1.5,
+                }}
+              >
+                South Fort Worth, TX 76134
+              </p>
+              <a
+                href="mailto:contact@sankofalegacyschool.org"
+                style={linkStyle}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold-primary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+              >
+                contact@sankofalegacyschool.org
+              </a>
               <a
                 href="#"
                 style={linkStyle}
@@ -210,14 +228,6 @@ export default function Footer() {
               >
                 <TikTokIcon />
                 TikTok
-              </a>
-              <a
-                href="mailto:contact@sankofalegacyschool.org"
-                style={linkStyle}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold-primary)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
-              >
-                contact@sankofalegacyschool.org
               </a>
             </div>
           </div>

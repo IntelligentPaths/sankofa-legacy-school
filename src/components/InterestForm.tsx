@@ -164,7 +164,7 @@ export default function InterestForm() {
         {/* ── parent name ── */}
         <div>
           <label htmlFor="parentName" style={labelStyle}>
-            Parent Name<span style={requiredStarStyle} aria-hidden>*</span>
+            Your Name<span style={requiredStarStyle} aria-hidden>*</span>
           </label>
           <input
             id="parentName"
@@ -200,7 +200,7 @@ export default function InterestForm() {
         {/* ── email ── */}
         <div>
           <label htmlFor="email" style={labelStyle}>
-            Email<span style={requiredStarStyle} aria-hidden>*</span>
+            Email Address<span style={requiredStarStyle} aria-hidden>*</span>
           </label>
           <input
             id="email"
@@ -219,7 +219,7 @@ export default function InterestForm() {
         {/* ── phone ── */}
         <div>
           <label htmlFor="phone" style={labelStyle}>
-            Phone<span style={requiredStarStyle} aria-hidden>*</span>
+            Phone Number<span style={requiredStarStyle} aria-hidden>*</span>
           </label>
           <input
             id="phone"
@@ -239,7 +239,7 @@ export default function InterestForm() {
         {/* ── child grade ── */}
         <div>
           <label htmlFor="childGrade" style={labelStyle}>
-            Child&rsquo;s Grade<span style={requiredStarStyle} aria-hidden>*</span>
+            Child&rsquo;s Current Grade<span style={requiredStarStyle} aria-hidden>*</span>
           </label>
           <select
             id="childGrade"
@@ -251,7 +251,7 @@ export default function InterestForm() {
             style={inputBaseStyle}
           >
             <option value="" disabled>
-              Select a grade
+              Select grade
             </option>
             {GRADES.map((g) => (
               <option key={g} value={g}>
@@ -264,7 +264,7 @@ export default function InterestForm() {
         {/* ── how heard (now required) ── */}
         <div>
           <label htmlFor="howHeard" style={labelStyle}>
-            How did you hear about us?
+            How did you hear about Sankofa?
             <span style={requiredStarStyle} aria-hidden>*</span>
           </label>
           <input
@@ -276,7 +276,7 @@ export default function InterestForm() {
             onBlur={onBlur}
             required
             style={inputBaseStyle}
-            placeholder="A friend, social media, a community event…"
+            placeholder="Friend, social media, school, event, etc."
           />
         </div>
 
@@ -307,7 +307,7 @@ export default function InterestForm() {
             marginTop: "0.5rem",
           }}
         >
-          {isSubmitting ? "Submitting..." : "Join the Founding Cohort"}
+          {isSubmitting ? "Submitting..." : "Request Next Steps →"}
         </button>
 
         {/* ── status ── */}

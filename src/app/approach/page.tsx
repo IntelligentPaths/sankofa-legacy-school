@@ -20,9 +20,12 @@ type Pillar = {
   variant: 1 | 2 | 3 | 4;
   accent: string;
   bgGradient: string;
-  description: string;
+  oneLiner: string;
   focusAreas: string[];
-  outcome: string;
+  paragraph1: string;
+  paragraph2: string;
+  inPractice: string;
+  result: string;
 };
 
 const PILLARS: Pillar[] = [
@@ -34,8 +37,8 @@ const PILLARS: Pillar[] = [
     accent: "var(--gold-primary)",
     bgGradient:
       "linear-gradient(180deg, var(--cream) 0%, #FAEAB7 100%)",
-    description:
-      "Deep competence in core academic domains through reasoning-based learning and demonstrated understanding — not memorization. Students learn how to think, not just what to recall. Math, literacy, science, and the analytical disciplines are taught through structured problem-solving, where every concept must be explained, applied, and re-applied in a new context before we move on.",
+    oneLiner:
+      "Students don’t just learn — they understand and can explain their thinking.",
     focusAreas: [
       "Math reasoning",
       "Literacy & communication",
@@ -43,8 +46,14 @@ const PILLARS: Pillar[] = [
       "Structured problem solving",
       "Independent inquiry",
     ],
-    outcome:
-      "Students become capable, independent thinkers who can explain their reasoning and apply knowledge in new contexts.",
+    paragraph1:
+      "Deep competence in core academic domains through reasoning-based learning and demonstrated understanding — not memorization. Students learn how to think, not just what to recall.",
+    paragraph2:
+      "Math, literacy, and science are taught through structured problem-solving. Every concept must be explained, applied, and re-applied in a new context before we move on.",
+    inPractice:
+      "In practice: a student explains how they solved a problem — not just the answer.",
+    result:
+      "Students become confident, independent thinkers who can explain their reasoning and apply knowledge in new situations.",
   },
   {
     id: "identity",
@@ -54,8 +63,8 @@ const PILLARS: Pillar[] = [
     accent: "var(--rust)",
     bgGradient:
       "linear-gradient(180deg, #FAEAB7 0%, #F4D6A2 100%)",
-    description:
-      "A strong sense of self grounded in historical awareness, cultural literacy, and personal reflection. Students study the diaspora, the wisdom traditions of multiple cultures, and the languages and stories that shaped where they come from. Identity isn't a sidebar — it's woven through every discipline. A child who knows their roots stands taller in the world.",
+    oneLiner:
+      "Students learn who they are, where they come from, and how they move in the world.",
     focusAreas: [
       "Diaspora studies",
       "Cultural literacy",
@@ -63,8 +72,14 @@ const PILLARS: Pillar[] = [
       "Ethical reflection",
       "Historical awareness",
     ],
-    outcome:
-      "Students understand who they are, where they come from, and how they relate to the broader world.",
+    paragraph1:
+      "A strong sense of self grounded in historical awareness, cultural literacy, and personal reflection. Students study the diaspora, the wisdom traditions of multiple cultures, and the languages and stories that shaped their roots.",
+    paragraph2:
+      "Identity is not a separate subject — it is woven through every discipline. A child who knows their roots stands taller in the world.",
+    inPractice:
+      "In practice: students connect history, culture, and their own story in daily learning.",
+    result:
+      "Students develop confidence, clarity, and a strong sense of who they are.",
   },
   {
     id: "creation",
@@ -74,8 +89,7 @@ const PILLARS: Pillar[] = [
     accent: "var(--gold-warm)",
     bgGradient:
       "linear-gradient(180deg, #F4D6A2 0%, #ECC288 100%)",
-    description:
-      "Knowledge applied through building, designing, and producing meaningful work. Students don't just consume — they make. Every term they ship something: a design, an essay, a small business, an engineering challenge solved, a research finding shared. The discipline of moving from idea to implementation is the discipline that builds future leaders.",
+    oneLiner: "Students don’t just learn — they build and create real things.",
     focusAreas: [
       "Entrepreneurship",
       "Engineering challenges",
@@ -83,8 +97,14 @@ const PILLARS: Pillar[] = [
       "Project-based learning",
       "Creative production",
     ],
-    outcome:
-      "Students learn to move from ideas to implementation — building things that matter.",
+    paragraph1:
+      "Knowledge is applied through building, designing, and producing meaningful work. Students don’t just consume — they make.",
+    paragraph2:
+      "Every term, students create something real: a design, an essay, a small business, an engineering solution, or a research project shared with others.",
+    inPractice:
+      "In practice: students build projects, launch ideas, and present their work.",
+    result:
+      "Students learn how to turn ideas into reality — building things that matter.",
   },
   {
     id: "community",
@@ -94,8 +114,8 @@ const PILLARS: Pillar[] = [
     accent: "var(--gold-deep)",
     bgGradient:
       "linear-gradient(180deg, #ECC288 0%, #D9A858 100%)",
-    description:
-      "Responsibility toward others — learning to lead, collaborate, and contribute in ways that strengthen the collective. Mentorship is built into the school day. Older students lead younger ones. Service projects connect classroom learning to the neighborhood. Students learn that excellence without contribution is incomplete.",
+    oneLiner:
+      "Students learn to lead, work together, and contribute every day.",
     focusAreas: [
       "Mentorship",
       "Teamwork",
@@ -103,7 +123,14 @@ const PILLARS: Pillar[] = [
       "Service projects",
       "Accountability",
     ],
-    outcome: "Students see themselves as contributors, not just achievers.",
+    paragraph1:
+      "Responsibility toward others is built into the school day. Students learn to lead, collaborate, and contribute in ways that strengthen others.",
+    paragraph2:
+      "Mentorship is part of daily learning. Older students guide younger ones, and service projects connect classroom work to real community needs.",
+    inPractice:
+      "In practice: students mentor peers and take on real leadership roles each day.",
+    result:
+      "Students see themselves as leaders and contributors — not just participants.",
   },
 ];
 
@@ -270,36 +297,22 @@ export default function ApproachPage() {
           }}
         >
           <FadeIn>
-            <p
-              style={{
-                ...kicker,
-                color: "var(--gold-primary)",
-              }}
-            >
-              Ready to apply?
-            </p>
             <h2
               className="font-display"
               style={{
                 fontSize: "clamp(1.8rem, 4vw, 2.75rem)",
-                margin: "1rem 0 1.5rem",
+                margin: "0 0 2rem",
                 fontWeight: 600,
+                lineHeight: 1.3,
+                maxWidth: "30ch",
+                marginLeft: "auto",
+                marginRight: "auto",
               }}
             >
-              The founding cohort opens in August 2026.
+              This is how Sankofa works every day.
+              <br />
+              Now see if it&rsquo;s the right fit for your family.
             </h2>
-            <p
-              className="font-body"
-              style={{
-                color: "var(--text-secondary)",
-                maxWidth: "52ch",
-                margin: "0 auto 2rem",
-                lineHeight: 1.65,
-              }}
-            >
-              Cohort of 24 students. Recruitment closes June 1, 2026. ESA
-              voucher pathway available — no family is priced out.
-            </p>
             <Link
               href="/admissions"
               className="font-body"
@@ -318,7 +331,7 @@ export default function ApproachPage() {
                 boxShadow: "0 4px 32px rgba(251,205,50,0.25)",
               }}
             >
-              Begin Admissions →
+              Apply for the Founding Cohort →
             </Link>
           </FadeIn>
         </section>
@@ -350,30 +363,35 @@ function PillarBody({ pillar }: { pillar: Pillar }) {
           style={{
             fontSize: "clamp(2rem, 4vw, 3rem)",
             color: "var(--near-black)",
-            margin: "0.25rem 0 1.25rem",
+            margin: "0.25rem 0 0.75rem",
             fontWeight: 600,
             lineHeight: 1.1,
           }}
         >
           {pillar.name}
         </h2>
+
+        {/* one-liner translation */}
         <p
-          className="font-body"
+          className="font-display italic"
           style={{
-            fontSize: "1rem",
-            color: "rgba(28,27,32,0.82)",
-            lineHeight: 1.7,
+            fontSize: "clamp(1.05rem, 2vw, 1.25rem)",
+            color: pillar.accent,
             margin: "0 0 1.5rem",
+            lineHeight: 1.45,
+            fontWeight: 500,
           }}
         >
-          {pillar.description}
+          {pillar.oneLiner}
         </p>
+
+        {/* focus-area bullets */}
         <div
           style={{
             display: "flex",
             flexWrap: "wrap",
             gap: "0.5rem 0.75rem",
-            marginBottom: "1.5rem",
+            marginBottom: "1.75rem",
           }}
         >
           {pillar.focusAreas.map((f) => (
@@ -397,18 +415,62 @@ function PillarBody({ pillar }: { pillar: Pillar }) {
             </span>
           ))}
         </div>
+
+        {/* paragraph 1 */}
+        <p
+          className="font-body"
+          style={{
+            fontSize: "1rem",
+            color: "rgba(28,27,32,0.82)",
+            lineHeight: 1.7,
+            margin: "0 0 1rem",
+          }}
+        >
+          {pillar.paragraph1}
+        </p>
+
+        {/* paragraph 2 */}
+        <p
+          className="font-body"
+          style={{
+            fontSize: "1rem",
+            color: "rgba(28,27,32,0.82)",
+            lineHeight: 1.7,
+            margin: "0 0 1.5rem",
+          }}
+        >
+          {pillar.paragraph2}
+        </p>
+
+        {/* in practice */}
+        <p
+          className="font-body"
+          style={{
+            fontSize: "0.95rem",
+            color: "rgba(28,27,32,0.7)",
+            lineHeight: 1.6,
+            margin: "0 0 1.5rem",
+            fontStyle: "italic",
+          }}
+        >
+          {pillar.inPractice}
+        </p>
+
+        {/* result — visually distinct: gold/accent left border, italic, slightly larger */}
         <p
           className="font-display italic"
           style={{
-            fontSize: "1.05rem",
-            color: "rgba(28,27,32,0.7)",
+            fontSize: "1.15rem",
+            color: "var(--near-black)",
             margin: 0,
-            paddingLeft: "1rem",
-            borderLeft: `3px solid ${pillar.accent}`,
+            padding: "0.75rem 1rem 0.75rem 1.25rem",
+            borderLeft: `4px solid ${pillar.accent}`,
+            background: "rgba(255,255,255,0.45)",
             lineHeight: 1.5,
+            fontWeight: 600,
           }}
         >
-          {pillar.outcome}
+          {pillar.result}
         </p>
       </div>
     </FadeIn>

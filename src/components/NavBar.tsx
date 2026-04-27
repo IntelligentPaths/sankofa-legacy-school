@@ -20,7 +20,6 @@ const NAV_ITEMS = [
   { label: "About", href: "/about" },
   { label: "Approach", href: "/approach" },
   { label: "Admissions", href: "/admissions" },
-  { label: "Visit", href: "/visit" },
 ];
 
 const LOGO_HORIZONTAL = "/logos/sankofa-logo-horizontal.svg";

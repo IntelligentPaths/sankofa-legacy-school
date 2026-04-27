@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 import { FadeIn } from "@/lib/motion";
 
 /* ── /admissions
- * Founding cohort process. Lead with urgency: 24 seats, deadline 6/1/2026.
- * Embed the full InterestForm at the bottom.
+ * Founding cohort process. Lead with urgency: 24 seats, deadline 7/1/2026.
+ * Embed the full InterestForm + Plan-a-Visit section at the bottom.
  * ──────────────────────────────────────────────────────────────── */
 
 const STEPS = [
@@ -15,25 +15,25 @@ const STEPS = [
     step: "1",
     title: "Submit interest",
     body:
-      "Tell us about your family. We'll respond within a few days to set up a conversation.",
+      "Tell us about your family. We'll follow up within a few days to schedule a conversation.",
   },
   {
     step: "2",
     title: "Family conversation",
     body:
-      "A 30-minute conversation to understand your child, your hopes, and whether Sankofa is the right home for them.",
+      "A 30-minute conversation to understand your child, your goals, and whether Sankofa is the right fit.",
   },
   {
     step: "3",
-    title: "Tuition & ESA pathway",
+    title: "Tuition & TEFA pathway",
     body:
-      "We'll walk through tuition options, including the Texas ESA voucher pathway. No family is priced out who fits the mission.",
+      "We'll walk through tuition options, including the Texas ESA voucher pathway. Families aligned with the mission will not be priced out.",
   },
   {
     step: "4",
     title: "Welcome to the cohort",
     body:
-      "Enrollment paperwork, orientation date, and your child's place in the founding class of 24.",
+      "Complete enrollment, receive your orientation date, and secure your child's place in the founding cohort.",
   },
 ];
 
@@ -104,13 +104,15 @@ export default function AdmissionsPage() {
                 fontSize: "clamp(1.05rem, 2vw, 1.2rem)",
                 color: "rgba(28,27,32,0.78)",
                 lineHeight: 1.7,
-                maxWidth: "58ch",
+                maxWidth: "60ch",
                 margin: "0 auto",
               }}
             >
-              We&rsquo;re recruiting twenty-four students for the first year.
-              Recruitment closes <strong style={{ color: "var(--rust)" }}>June 1, 2026</strong>.
-              The founding cohort sets the culture; we are choosing carefully.
+              We are enrolling twenty-four students for our first year.
+              Applications close{" "}
+              <strong style={{ color: "var(--rust)" }}>July 1, 2026</strong>.
+              The founding cohort sets the culture — we are building this
+              group with intention.
             </p>
           </FadeIn>
         </section>
@@ -154,14 +156,26 @@ export default function AdmissionsPage() {
             className="font-body"
             style={{
               margin: 0,
-              padding: "0.5rem 0",
-              fontWeight: 600,
+              padding: "0.25rem 0 0",
+              fontWeight: 700,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
               fontSize: "0.85rem",
             }}
           >
-            Recruitment deadline · June 1, 2026 · 24 founding seats
+            Application deadline · July 1, 2026 · 24 founding seats
+          </p>
+          <p
+            className="font-body"
+            style={{
+              margin: "0.4rem 0 0.25rem",
+              fontWeight: 500,
+              letterSpacing: "0.06em",
+              fontSize: "0.85rem",
+              opacity: 0.92,
+            }}
+          >
+            Limited seats. Once filled, enrollment closes.
           </p>
         </section>
 
@@ -170,7 +184,7 @@ export default function AdmissionsPage() {
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             <FadeIn>
               <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-                <p style={kicker}>How It Works</p>
+                <p style={kicker}>The Enrollment Process</p>
                 <h2 className="font-display" style={sectionHeading}>
                   Four steps from interest to enrollment.
                 </h2>
@@ -238,7 +252,7 @@ export default function AdmissionsPage() {
           </div>
         </section>
 
-        {/* ══ TUITION & ESA ══ */}
+        {/* ══ TUITION & TEFA ══ */}
         <section
           style={{
             padding: "5rem 1.5rem",
@@ -254,7 +268,7 @@ export default function AdmissionsPage() {
             }}
           >
             <FadeIn>
-              <p style={kicker}>Tuition & ESA</p>
+              <p style={kicker}>Tuition</p>
               <h2 className="font-display" style={sectionHeading}>
                 No family priced out who fits the mission.
               </h2>
@@ -267,23 +281,22 @@ export default function AdmissionsPage() {
                   margin: "0 0 1rem",
                 }}
               >
-                Sankofa Legacy School accepts the Texas Education Savings
-                Account (ESA) voucher. For families participating in the
-                ESA program, voucher funds substantially or fully cover
-                tuition. For families outside the program, we have
-                graduated tuition options — reach out for a conversation.
+                We work with families who are aligned with our mission. Cost
+                should not be the barrier.
               </p>
               <p
-                className="font-body italic"
+                className="font-body"
                 style={{
-                  fontSize: "0.95rem",
-                  color: "var(--gold-deep)",
+                  fontSize: "1.05rem",
+                  color: "rgba(28,27,32,0.82)",
+                  lineHeight: 1.7,
                   margin: 0,
-                  fontWeight: 500,
                 }}
               >
-                Tuition assistance available through ESA vouchers; reach out
-                for details.
+                Sankofa Legacy School accepts the Texas Education Freedom
+                Account (TEFA) voucher. For many families, TEFA funds
+                substantially cover tuition. For families outside the program,
+                we offer flexible tuition options — reach out to learn more.
               </p>
             </FadeIn>
           </div>
@@ -293,7 +306,7 @@ export default function AdmissionsPage() {
         <section
           id="interest"
           style={{
-            padding: "5rem 1.5rem 6rem",
+            padding: "5rem 1.5rem 4rem",
             maxWidth: 620,
             margin: "0 auto",
             scrollMarginTop: "6rem",
@@ -315,8 +328,8 @@ export default function AdmissionsPage() {
                   margin: "0 auto",
                 }}
               >
-                Tell us about your family. We&rsquo;ll respond within a few
-                days.
+                Tell us about your family. We&rsquo;ll follow up within
+                48&ndash;72 hours.
               </p>
             </div>
           </FadeIn>
@@ -334,8 +347,134 @@ export default function AdmissionsPage() {
             </div>
           </FadeIn>
         </section>
+
+        {/* ══ PLAN A VISIT (folded in from the deleted /visit page) ══ */}
+        <section
+          id="visit"
+          style={{
+            padding: "5rem 1.5rem 6rem",
+            maxWidth: 1000,
+            margin: "0 auto",
+            scrollMarginTop: "6rem",
+          }}
+        >
+          <FadeIn>
+            <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+              <p style={kicker}>Plan a Visit</p>
+              <h2 className="font-display" style={sectionHeading}>
+                Come see what we&rsquo;re building.
+              </h2>
+              <p
+                className="font-body"
+                style={{
+                  fontSize: "1rem",
+                  color: "rgba(28,27,32,0.75)",
+                  lineHeight: 1.6,
+                  maxWidth: "52ch",
+                  margin: "0 auto",
+                }}
+              >
+                The best way to know whether Sankofa is right for your family
+                is to talk with us in person. Visits are arranged
+                individually so each family gets focused time.
+              </p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.15}>
+            <div
+              className="grid grid-cols-1 md:grid-cols-3"
+              style={{ gap: "1.25rem" }}
+            >
+              <ContactCard
+                label="Location"
+                value="South Fort Worth, TX 76134"
+                detail="Exact campus address shared during the family conversation."
+              />
+              <ContactCard
+                label="Email"
+                value="contact@sankofalegacyschool.org"
+                detail="Direct line to the founder. Replies within 48–72 hours."
+                href="mailto:contact@sankofalegacyschool.org"
+              />
+              <ContactCard
+                label="Visiting hours"
+                value="By appointment"
+                detail="Submit interest above and we'll arrange a visit window."
+              />
+            </div>
+          </FadeIn>
+        </section>
       </main>
       <Footer />
     </PageShell>
+  );
+}
+
+function ContactCard({
+  label,
+  value,
+  detail,
+  href,
+}: {
+  label: string;
+  value: string;
+  detail: string;
+  href?: string;
+}) {
+  const valueEl = (
+    <p
+      className="font-display"
+      style={{
+        fontSize: "clamp(1.1rem, 2vw, 1.35rem)",
+        color: "var(--rust)",
+        margin: "0.5rem 0 0.75rem",
+        fontWeight: 600,
+      }}
+    >
+      {value}
+    </p>
+  );
+
+  return (
+    <div
+      style={{
+        background: "rgba(255,255,255,0.65)",
+        border: "1px solid rgba(56,31,0,0.18)",
+        borderRadius: 4,
+        padding: "1.5rem",
+      }}
+    >
+      <p
+        className="font-body"
+        style={{
+          color: "var(--gold-deep)",
+          letterSpacing: "0.18em",
+          textTransform: "uppercase",
+          fontSize: "0.7rem",
+          fontWeight: 700,
+          margin: 0,
+        }}
+      >
+        {label}
+      </p>
+      {href ? (
+        <a href={href} style={{ textDecoration: "none", display: "block" }}>
+          {valueEl}
+        </a>
+      ) : (
+        valueEl
+      )}
+      <p
+        className="font-body"
+        style={{
+          color: "rgba(28,27,32,0.7)",
+          fontSize: "0.9rem",
+          lineHeight: 1.55,
+          margin: 0,
+        }}
+      >
+        {detail}
+      </p>
+    </div>
   );
 }

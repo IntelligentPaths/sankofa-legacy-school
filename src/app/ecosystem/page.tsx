@@ -25,25 +25,18 @@ const ORGS = [
     isSelf: true,
   },
   {
-    name: "UYN Learning Systems",
+    name: "Ubuntu Y Nosotros Learning Systems",
     role: "Learning architecture & curriculum design",
     description:
       "Frameworks, curriculum, and pedagogical infrastructure that the ecosystem's educational work runs on.",
     variant: 3 as const,
   },
   {
-    name: "Live Pura Vida",
-    role: "Lifestyle, wellness, and family engagement",
-    description:
-      "The connective tissue between the school day and the life of the family — wellness, gathering, and culture.",
-    variant: 4 as const,
-  },
-  {
     name: "Roots Rediscovered",
     role: "Heritage, ancestry, and cultural recovery",
     description:
       "Programming and content that helps families and students reconnect with the roots that ground identity.",
-    variant: 1 as const,
+    variant: 4 as const,
   },
 ];
 
@@ -141,7 +134,7 @@ export default function EcosystemPage() {
                     lineHeight: 1.15,
                   }}
                 >
-                  Five organizations. One rooted purpose.
+                  Four organizations. One rooted purpose.
                 </h2>
               </div>
             </FadeIn>

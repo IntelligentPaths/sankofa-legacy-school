@@ -2,19 +2,24 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useAnimationControls } from "framer-motion";
-import SankofaHexagon from "./SankofaHexagon";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
 /* ── portal: cinematic intro — doors open onto the homepage directly.
  *
- * Round 4: visible center seam removed. Logo reveal phase removed —
- * the portal now ends with the bloom + overlay fade, and the homepage
- * is what comes through next.
+ * Round 6: assembling/pulsing/splitting element is now the real brand
+ * mark (sankofa-logo-mark.svg) instead of the procedural SankofaHexagon.
+ * The clip-and-swing-open mechanic is unchanged: each 50vw wrapper
+ * renders a full mark centered on the seam, and the wrapper's
+ * `overflow: hidden` clips the half outside its viewport column.
+ *
+ * Round 4: visible center seam already removed. Logo reveal phase
+ * removed — the portal ends with bloom + overlay fade.
  * ──────────────────────────────────────────────────────────────── */
 
 type Props = { onComplete: () => void };
 
-const HEX_SIZE = 280;
+const MARK_SIZE = 280;
+const MARK_SRC = "/logos/sankofa-logo-mark.svg";
 
 const PANEL_IMAGE =
   "linear-gradient(to right, rgba(0,0,0,0.4), rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4))," +
@@ -138,7 +143,13 @@ export default function Portal({ onComplete }: Props) {
     >
       {reducedMotion ? (
         <motion.div initial={{ scale: 0.85, opacity: 0 }} animate={hexControls}>
-          <SankofaHexagon size={HEX_SIZE} uniqueId="portal-rm" />
+          <img
+            src={MARK_SRC}
+            alt="Sankofa Legacy School"
+            width={MARK_SIZE}
+            height={MARK_SIZE}
+            style={{ display: "block", width: MARK_SIZE, height: MARK_SIZE }}
+          />
         </motion.div>
       ) : (
         <>
@@ -170,7 +181,14 @@ export default function Portal({ onComplete }: Props) {
                 initial={{ scale: 0.85, opacity: 0 }}
                 animate={hexControls}
               >
-                <SankofaHexagon size={HEX_SIZE} uniqueId="portal-left" />
+                <img
+                  src={MARK_SRC}
+                  alt=""
+                  aria-hidden
+                  width={MARK_SIZE}
+                  height={MARK_SIZE}
+                  style={{ display: "block", width: MARK_SIZE, height: MARK_SIZE }}
+                />
               </motion.div>
             </div>
           </motion.div>
@@ -203,7 +221,14 @@ export default function Portal({ onComplete }: Props) {
                 initial={{ scale: 0.85, opacity: 0 }}
                 animate={hexControls}
               >
-                <SankofaHexagon size={HEX_SIZE} uniqueId="portal-right" />
+                <img
+                  src={MARK_SRC}
+                  alt=""
+                  aria-hidden
+                  width={MARK_SIZE}
+                  height={MARK_SIZE}
+                  style={{ display: "block", width: MARK_SIZE, height: MARK_SIZE }}
+                />
               </motion.div>
             </div>
           </motion.div>

@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import PageShell from "@/components/PageShell";
-import BrandPatternPlaceholder from "@/components/BrandPatternPlaceholder";
 import Footer from "@/components/Footer";
 import { FadeIn } from "@/lib/motion";
+import { images } from "@/lib/images";
 
 /* ── /about — Our Story ── */
 
@@ -111,6 +112,37 @@ export default function AboutPage() {
           </FadeIn>
         </section>
 
+        {/* ══ HERO IMAGE BAND ══ */}
+        <section
+          style={{
+            padding: "0 1.5rem 3rem",
+            maxWidth: 1280,
+            margin: "0 auto",
+          }}
+        >
+          <FadeIn>
+            <div
+              style={{
+                position: "relative",
+                aspectRatio: "16 / 9",
+                overflow: "hidden",
+                borderRadius: 6,
+                border: "1px solid rgba(56,31,0,0.18)",
+                boxShadow: "0 30px 80px rgba(56,31,0,0.25)",
+              }}
+            >
+              <Image
+                src={images.aboutHero}
+                alt="Sankofa Legacy School students in conversation — building the kind of community we want our children to grow up in"
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </FadeIn>
+        </section>
+
         <PatternDivider />
 
         {/* ══ MISSION ══ */}
@@ -153,49 +185,32 @@ export default function AboutPage() {
 
         {/* ══ MEANING OF SANKOFA ══ */}
         <section style={{ padding: "5rem 1.5rem" }}>
-          <div
-            style={{
-              maxWidth: 1100,
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: "3rem",
-            }}
-          >
-            <div
-              className="grid grid-cols-1 md:grid-cols-2"
-              style={{ gap: "3rem", alignItems: "center" }}
-            >
-              <FadeIn>
-                <div>
-                  <p style={kicker}>The Meaning of Sankofa</p>
-                  <h2 className="font-display" style={sectionHeading}>
-                    Go back and fetch it.
-                  </h2>
-                  <p style={bodyText}>
-                    <em>Sankofa</em> is an Adinkra concept from the Akan
-                    people of Ghana. The symbol most often appears as a bird
-                    flying forward while looking backward, an egg held in
-                    its beak — a reminder that to build well, you must
-                    return for the wisdom that has been left behind.
-                  </p>
-                  <p style={{ ...bodyText, marginTop: "1rem" }}>
-                    For our school, Sankofa is more than a name. It is a
-                    commitment: that what we teach is rooted in the
-                    inheritance of our students&rsquo; cultures, their
-                    histories, their stories — and that excellence in the
-                    future requires recovering what came before.
-                  </p>
-                </div>
-              </FadeIn>
-              <FadeIn delay={0.15}>
-                <BrandPatternPlaceholder
-                  variant={2}
-                  aspectRatio="1 / 1"
-                  ariaLabel="Sankofa Adinkra pattern"
-                />
-              </FadeIn>
-            </div>
+          <div style={{ maxWidth: 760, margin: "0 auto" }}>
+            <FadeIn>
+              <p style={{ ...kicker, textAlign: "center" }}>
+                The Meaning of Sankofa
+              </p>
+              <h2
+                className="font-display"
+                style={{ ...sectionHeading, textAlign: "center" }}
+              >
+                Go back and fetch it.
+              </h2>
+              <p style={bodyText}>
+                <em>Sankofa</em> is an Adinkra concept from the Akan people
+                of Ghana. The symbol most often appears as a bird flying
+                forward while looking backward, an egg held in its beak — a
+                reminder that to build well, you must return for the wisdom
+                that has been left behind.
+              </p>
+              <p style={{ ...bodyText, marginTop: "1rem" }}>
+                For our school, Sankofa is more than a name. It is a
+                commitment: that what we teach is rooted in the inheritance
+                of our students&rsquo; cultures, their histories, their
+                stories — and that excellence in the future requires
+                recovering what came before.
+              </p>
+            </FadeIn>
           </div>
         </section>
 

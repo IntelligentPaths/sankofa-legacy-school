@@ -10,6 +10,7 @@
 
 export const images = {
   heroSecondary: "/images/students/hero.png",
+  aboutHero: "/images/students/about.png",
   pillars: {
     mastery:   "/images/students/mastery.png",
     identity:  "/images/students/identity.png",

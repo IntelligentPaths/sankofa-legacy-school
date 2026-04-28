@@ -1,10 +1,53 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import PageShell from "@/components/PageShell";
-import BrandPatternPlaceholder from "@/components/BrandPatternPlaceholder";
 import Footer from "@/components/Footer";
 import { FadeIn } from "@/lib/motion";
+import { images } from "@/lib/images";
+
+/* alt-text per pillar for the photo blocks */
+const PILLAR_ALT: Record<string, string> = {
+  mastery:
+    "A Sankofa student deeply absorbed in academic work — Mastery in practice",
+  identity:
+    "A Sankofa student grounded in cultural and historical learning — Identity in practice",
+  creation:
+    "A Sankofa student building a hands-on project — Creation in practice",
+  community:
+    "Sankofa students collaborating and leading together — Community in practice",
+};
+
+function PillarImage({
+  pillarId,
+  name,
+}: {
+  pillarId: keyof typeof images.pillars;
+  name: string;
+}) {
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "4 / 3",
+        overflow: "hidden",
+        borderRadius: 6,
+        border: "1px solid rgba(56,31,0,0.18)",
+        boxShadow: "0 18px 48px rgba(56,31,0,0.18)",
+      }}
+    >
+      <Image
+        src={images.pillars[pillarId]}
+        alt={PILLAR_ALT[pillarId] ?? `Sankofa students — ${name}`}
+        fill
+        sizes="(max-width: 768px) 100vw, 540px"
+        style={{ objectFit: "cover" }}
+      />
+    </div>
+  );
+}
 
 /* ── /approach
  *
@@ -267,18 +310,18 @@ export default function ApproachPage() {
               >
                 {idx % 2 === 1 ? (
                   <>
-                    <BrandPatternPlaceholder
-                      variant={p.variant}
-                      ariaLabel={`${p.name} pattern`}
+                    <PillarImage
+                      pillarId={p.id as keyof typeof images.pillars}
+                      name={p.name}
                     />
                     <PillarBody pillar={p} />
                   </>
                 ) : (
                   <>
                     <PillarBody pillar={p} />
-                    <BrandPatternPlaceholder
-                      variant={p.variant}
-                      ariaLabel={`${p.name} pattern`}
+                    <PillarImage
+                      pillarId={p.id as keyof typeof images.pillars}
+                      name={p.name}
                     />
                   </>
                 )}

@@ -3,18 +3,18 @@
  * hardcoding paths throughout the codebase — if filenames change, only
  * this file needs updating.
  *
- * Student & founder images were generated in Runway with brand-aligned
- * cinematic prompting (dark-to-amber gradient backgrounds, warm directional
- * lighting, age-appropriate subjects, subtle Adinkra pattern accents).
+ * Hero + four pillar images are Runway-generated PNGs served via
+ * Next.js <Image>, which handles WebP/AVIF conversion + srcSet at
+ * request time. Founder + OG slots remain on placeholder JPGs.
  */
 
 export const images = {
-  heroSecondary: "/images/students/hero-secondary.jpg",
+  heroSecondary: "/images/students/hero.png",
   pillars: {
-    mastery:   "/images/students/mastery.jpg",
-    identity:  "/images/students/identity.jpg",
-    creation:  "/images/students/creation.jpg",
-    community: "/images/students/community.jpg",
+    mastery:   "/images/students/mastery.png",
+    identity:  "/images/students/identity.png",
+    creation:  "/images/students/creation.png",
+    community: "/images/students/community.png",
   },
   founders: {
     juleon: "/images/founders/juleon-placeholder.jpg",

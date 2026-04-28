@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Portal from "@/components/Portal";
 import PageShell from "@/components/PageShell";
-import BrandPatternPlaceholder from "@/components/BrandPatternPlaceholder";
 import InterestForm from "@/components/InterestForm";
 import Footer from "@/components/Footer";
 import { FadeIn, useHasMounted } from "@/lib/motion";
 import { hasSeenPortal, markPortalSeen } from "@/lib/portal";
+import { images } from "@/lib/images";
 
 /* ── Homepage
  *
@@ -255,10 +256,13 @@ export default function HomePage() {
                 boxShadow: "0 30px 80px rgba(0,0,0,0.6)",
               }}
             >
-              <BrandPatternPlaceholder
-                variant={1}
-                aspectRatio="16 / 9"
-                ariaLabel="Sankofa brand pattern"
+              <Image
+                src={images.heroSecondary}
+                alt="Students learning together at Sankofa Legacy School"
+                fill
+                priority
+                sizes="(max-width: 1400px) 100vw, 1400px"
+                style={{ objectFit: "cover" }}
               />
               <div
                 style={{
@@ -371,11 +375,27 @@ export default function HomePage() {
                       "rgba(251,205,50,0.04)";
                   }}
                 >
-                  <BrandPatternPlaceholder
-                    variant={p.variant}
-                    aspectRatio="4 / 3"
-                    ariaLabel={`${p.name} pillar pattern`}
-                  />
+                  <div
+                    style={{
+                      position: "relative",
+                      aspectRatio: "4 / 3",
+                      overflow: "hidden",
+                      borderRadius: 4,
+                      border: "1px solid rgba(251,205,50,0.18)",
+                    }}
+                  >
+                    <Image
+                      src={
+                        images.pillars[
+                          p.name.toLowerCase() as keyof typeof images.pillars
+                        ]
+                      }
+                      alt={`Sankofa students embodying the ${p.name} pillar`}
+                      fill
+                      sizes="(max-width: 600px) 100vw, (max-width: 1180px) 50vw, 290px"
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
                   <p
                     className="font-display"
                     style={{

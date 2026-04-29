@@ -329,7 +329,7 @@ export default function AdmissionsPage() {
                 }}
               >
                 Tell us about your family. We&rsquo;ll follow up within
-                48&ndash;72 hours.
+                24&ndash;48 hours.
               </p>
             </div>
           </FadeIn>
@@ -393,7 +393,7 @@ export default function AdmissionsPage() {
               <ContactCard
                 label="Email"
                 value="contact@sankofalegacyschool.org"
-                detail="Direct line to the founder. Replies within 48–72 hours."
+                detail="Direct line to the founder. Replies within 24–48 hours."
                 href="mailto:contact@sankofalegacyschool.org"
               />
               <ContactCard

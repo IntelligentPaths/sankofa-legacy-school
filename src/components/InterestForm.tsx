@@ -323,7 +323,8 @@ export default function InterestForm() {
               fontWeight: 600,
             }}
           >
-            Thank you! We&rsquo;ll be in touch about the founding cohort.
+            Thank you. We&rsquo;ll be in touch within 24&ndash;48 hours about
+            the founding cohort.
           </p>
         )}
         {submitState === "error" && (

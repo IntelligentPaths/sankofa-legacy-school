@@ -20,6 +20,9 @@ export const images = {
   founders: {
     juleon: "/images/founders/juleon-placeholder.jpg",
   },
+  orgs: {
+    ubuntuYNosotros: "/images/orgs/ubuntu-y-nosotros-logo.png",
+  },
   og: {
     default: "/images/og/default.jpg",
   },

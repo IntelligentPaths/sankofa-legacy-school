@@ -1,27 +1,39 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import PageShell from "@/components/PageShell";
 import BrandPatternPlaceholder from "@/components/BrandPatternPlaceholder";
 import Footer from "@/components/Footer";
 import { FadeIn } from "@/lib/motion";
+import { images } from "@/lib/images";
 
 /* ── /ecosystem ── */
 
-const ORGS = [
+type Org = {
+  name: string;
+  role: string;
+  description: string;
+  variant: 1 | 2 | 3 | 4;
+  isSelf?: boolean;
+  logoSrc?: string;
+  logoAlt?: string;
+};
+
+const ORGS: Org[] = [
   {
     name: "Pura Vida Youth",
     role: "Youth development & community programming",
     description:
       "Mentorship, summer programming, and community-rooted enrichment for young people.",
-    variant: 1 as const,
+    variant: 1,
   },
   {
     name: "Sankofa Legacy School",
-    role: "K–5 microschool — the educational anchor",
+    role: "Private K–5 microschool — the educational anchor",
     description:
       "A small, intentional elementary microschool in South Fort Worth, building scholars rooted in legacy.",
-    variant: 2 as const,
+    variant: 2,
     isSelf: true,
   },
   {
@@ -29,14 +41,16 @@ const ORGS = [
     role: "Learning architecture & curriculum design",
     description:
       "Frameworks, curriculum, and pedagogical infrastructure that the ecosystem's educational work runs on.",
-    variant: 3 as const,
+    variant: 3,
+    logoSrc: images.orgs.ubuntuYNosotros,
+    logoAlt: "Ubuntu y Nosotros Learning Systems logo",
   },
   {
     name: "Roots Rediscovered",
     role: "Heritage, ancestry, and cultural recovery",
     description:
       "Programming and content that helps families and students reconnect with the roots that ground identity.",
-    variant: 4 as const,
+    variant: 4,
   },
 ];
 
@@ -181,11 +195,32 @@ export default function EcosystemPage() {
                         You are here
                       </div>
                     )}
-                    <BrandPatternPlaceholder
-                      variant={org.variant}
-                      aspectRatio="4 / 3"
-                      ariaLabel={`${org.name} pattern`}
-                    />
+                    {org.logoSrc ? (
+                      <div
+                        style={{
+                          position: "relative",
+                          aspectRatio: "4 / 3",
+                          width: "100%",
+                          overflow: "hidden",
+                          borderRadius: 4,
+                          border: "1px solid rgba(56,31,0,0.18)",
+                        }}
+                      >
+                        <Image
+                          src={org.logoSrc}
+                          alt={org.logoAlt ?? `${org.name} logo`}
+                          fill
+                          sizes="(max-width: 600px) 100vw, (max-width: 1180px) 50vw, 290px"
+                          style={{ objectFit: "contain" }}
+                        />
+                      </div>
+                    ) : (
+                      <BrandPatternPlaceholder
+                        variant={org.variant}
+                        aspectRatio="4 / 3"
+                        ariaLabel={`${org.name} pattern`}
+                      />
+                    )}
                     <h3
                       className="font-display"
                       style={{

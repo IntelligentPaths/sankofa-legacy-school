@@ -103,11 +103,12 @@ export default function AboutPage() {
                 margin: "0 auto",
               }}
             >
-              Sankofa Legacy School is a small, intentional K&ndash;5
-              microschool — opening with a founding cohort of 24 in South
-              Fort Worth, August 2026. We exist to graduate scholars who are
-              capable in their academics, grounded in their identity, and
-              ready to build the world they want to live in.
+              Sankofa Legacy School is a small, intentional Private
+              K&ndash;5 microschool — opening with a founding cohort of 24
+              in South Fort Worth, August 2026. We exist to graduate
+              scholars who are capable in their academics, grounded in
+              their identity, and ready to build the world they want to
+              live in.
             </p>
           </FadeIn>
         </section>

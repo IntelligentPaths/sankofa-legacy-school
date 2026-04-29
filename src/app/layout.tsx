@@ -3,11 +3,11 @@ import "./globals.css";
 import LayoutShell from "@/components/LayoutShell";
 
 export const metadata: Metadata = {
-  title: "Sankofa Legacy School — K–5 Microschool in South Fort Worth",
+  title: "Sankofa Legacy School — Private K–5 Microschool in South Fort Worth",
   description:
     "A small, intentional elementary microschool building scholars, leaders, and legacy-makers through rigorous academics, cultural grounding, and project-based learning. Founding cohort — August 2026.",
   openGraph: {
-    title: "Sankofa Legacy School — K–5 Microschool in South Fort Worth",
+    title: "Sankofa Legacy School — Private K–5 Microschool in South Fort Worth",
     description:
       "A small, intentional elementary microschool building scholars, leaders, and legacy-makers through rigorous academics, cultural grounding, and project-based learning. Founding cohort — August 2026.",
   },

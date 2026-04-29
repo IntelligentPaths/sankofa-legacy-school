@@ -159,7 +159,7 @@ export default function HomePage() {
         >
           {/* SEO h1 — visually hidden because the wordmark logo IS the headline */}
           <h1 style={visuallyHidden}>
-            Sankofa Legacy School — K–5 Microschool in South Fort Worth
+            Sankofa Legacy School — Private K–5 Microschool in South Fort Worth
           </h1>
 
           <FadeIn delay={0.1}>
@@ -208,8 +208,9 @@ export default function HomePage() {
                 margin: 0,
               }}
             >
-              A small, intentional K–5 microschool in South Fort Worth offering
-              rigorous academics, cultural grounding, and project-based learning.
+              A small, intentional Private K–5 microschool in South Fort Worth
+              offering rigorous academics, cultural grounding, and project-based
+              learning.
             </p>
           </FadeIn>
 
